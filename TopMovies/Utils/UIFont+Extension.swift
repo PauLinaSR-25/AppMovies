@@ -13,7 +13,7 @@ extension UIFont {
         case .iPad:
             return UIFont(name: "Avenir-Heavy", size: 40) ?? .boldSystemFont(ofSize: 40)
         default:
-            return UIFont(name: "Avenir-Heavy", size: 14) ?? .boldSystemFont(ofSize: 14)
+            return UIFont(name: "Avenir-Heavy", size: 24) ?? .boldSystemFont(ofSize: 24)
         }
     }
     
@@ -22,7 +22,7 @@ extension UIFont {
         case .iPad:
             return UIFont(name: "Avenir-Heavy", size: 18) ?? .boldSystemFont(ofSize: 18)
         default:
-            return UIFont(name: "Avenir-Heavy", size: 12) ?? .boldSystemFont(ofSize: 12)
+            return UIFont(name: "Avenir-Heavy", size: 16) ?? .boldSystemFont(ofSize: 16)
         }
     }
 }

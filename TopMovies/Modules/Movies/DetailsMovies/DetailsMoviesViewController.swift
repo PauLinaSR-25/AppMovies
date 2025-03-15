@@ -24,7 +24,7 @@ class DetailsMoviesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "Detalle de Pelicula"
     }
 }
 

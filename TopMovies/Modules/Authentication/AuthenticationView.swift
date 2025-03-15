@@ -76,16 +76,16 @@ extension AuthenticationView {
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -60),
-            titleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
+            titleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: ExecutionDevice.detectDevice() == .iPad ? 0.5 : 1.0),
             
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            stackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6),
+            stackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: ExecutionDevice.detectDevice() == .iPad ? 0.6 : 0.8),
             
             emailTextField.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.055),
             
             loginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            loginButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6),
+            loginButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: ExecutionDevice.detectDevice() == .iPad ? 0.6 : 0.8),
             loginButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 40),
             loginButton.heightAnchor.constraint(equalTo: emailTextField.heightAnchor)
         ])

@@ -44,7 +44,7 @@ class CustomTextField: UITextField {
         focusEffect = .none
         textColor = .black
         textAlignment = .left
-        layer.borderColor = UIColor.appSecondElement.cgColor
+        layer.borderColor = UIColor.appElement.cgColor
         layer.borderWidth = 2
         layer.cornerRadius = 10
         backgroundColor = .white
@@ -71,14 +71,5 @@ extension CustomTextField: UITextFieldDelegate {
         let valid = validation.isValid(text: text)
         
         layer.borderColor =  valid ? UIColor.appSecondElement.cgColor : UIColor.appElement.cgColor
-        
-        if valid {
-            switch fieldType {
-            case .email:
-                BannerAlert.show(showSavedSuccessfully: false, message: "Correo invalido")
-            case .password:
-                BannerAlert.show(showSavedSuccessfully: false, message: "Contraseña no ingresada")
-            }
-        }
     }
 }

@@ -24,7 +24,8 @@ class ListMoviesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Peliculas"
+        title = "Top Ten Rated"
+        self.navigationItem.hidesBackButton = true
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 }

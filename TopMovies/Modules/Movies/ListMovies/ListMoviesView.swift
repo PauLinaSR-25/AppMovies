@@ -25,7 +25,7 @@ final class ListMoviesView: UIView {
 
 extension ListMoviesView {
     private func setup() {
-        translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .appScreenBackground
     }
 }
 

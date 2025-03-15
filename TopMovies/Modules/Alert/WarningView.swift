@@ -47,8 +47,8 @@ final class BannerAlert: UIView {
     static func create(_ showSavedSuccessfully: Bool, _ keyWindow: UIWindow,_ message: String) -> BannerAlert {
         let screenSize = UIScreen.main.bounds.size
         
-        let backgroundColor = showSavedSuccessfully ? UIColor(named: "BannerAlertSuccessBackground") : UIColor(named: "BannerAlertErrorBackground")
-        let textColor = showSavedSuccessfully ? UIColor(named: "BannerAlertSuccessText") : UIColor(named: "BannerAlertErrorText")
+        let backgroundColor = showSavedSuccessfully ? UIColor.appAlertSuccessBackground : UIColor.appAlertErrorBackground
+        let textColor = UIColor.darkGray
         
         let BannerAlert = BannerAlert(frame: .zero)
         BannerAlert.backgroundColor = backgroundColor
@@ -72,6 +72,7 @@ final class BannerAlert: UIView {
         
         textLabel.centerXAnchor.constraint(equalTo: BannerAlert.centerXAnchor).isActive = true
         textLabel.centerYAnchor.constraint(equalTo: BannerAlert.centerYAnchor).isActive = true
+        textLabel.widthAnchor.constraint(equalTo: BannerAlert.widthAnchor, multiplier: 0.80).isActive = true
         
         return BannerAlert
     }

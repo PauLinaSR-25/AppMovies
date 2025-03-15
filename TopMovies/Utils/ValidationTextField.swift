@@ -18,12 +18,6 @@ extension ValidationStrategy {
     }
 }
 
-class EmailValidation: ValidationStrategy {
-    func isValid(text: String) -> Bool {
-        let emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
-        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegex)
-        return emailTest.evaluate(with: text)
-    }
-}
+class EmailValidation: ValidationStrategy {}
 
 class PasswordValidation: ValidationStrategy {}

@@ -27,12 +27,18 @@ class AuthenticationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        contentView.addGestureRecognizer(tapGesture)
         contentView.loginButton.addTarget(self, action: #selector(didTapLogin), for: .touchUpInside)
     }
     
     @objc private func didTapLogin() {
-        print("Loading login...")
         presenter?.login(email: contentView.getEmail(), password: contentView.getPassword())
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 

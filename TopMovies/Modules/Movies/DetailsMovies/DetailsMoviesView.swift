@@ -25,7 +25,7 @@ final class DetailsMoviesView: UIView {
 
 extension DetailsMoviesView {
     private func setup() {
-        translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .appScreenBackground
     }
 }
 
