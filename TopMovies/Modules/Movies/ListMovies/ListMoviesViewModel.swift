@@ -13,3 +13,20 @@ struct MovieEntity {
     var poster: String?
     var rating: Double = 0.0
 }
+
+struct MovieAPIEntity: Decodable {
+    let id: Int
+    let title: String
+    let posterPath: String?
+    let voteAverage: Double
+
+    enum CodingKeys: String, CodingKey {
+        case id, title
+        case posterPath = "poster_path"
+        case voteAverage = "vote_average"
+    }
+}
+
+struct MovieResponse: Decodable {
+    let results: [MovieAPIEntity]
+}

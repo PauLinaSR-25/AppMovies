@@ -12,9 +12,12 @@ import Foundation
 protocol ListMoviesPresenterProtocol: AnyObject {
     var interactor: ListMoviesInteractorInputProtocol? {get set}
     
-    func logOut()
-    func getMovies() -> [MovieEntity]
+    func getMovies()
+    func getNumberOfMovies() -> Int
+    func getMovieForIndex(_ index: Int) -> MovieEntity
+    
     func selectItemMovie(index: Int)
+    func logOut()
 }
 
 class ListMoviesPresenter {
@@ -28,15 +31,21 @@ class ListMoviesPresenter {
         self.interactor = interactor
         self.router = router
     }
+    
+    private var movies: [MovieEntity] = []
 }
 
 extension ListMoviesPresenter: ListMoviesPresenterProtocol {
-    func getMovies() -> [MovieEntity] {
-        [
-            MovieEntity(title: "Inception", poster: "https://example.com/inception.jpg", rating: 8.8),
-            MovieEntity(title: "Titanic", poster: "https://example.com/titanic.jpg", rating: 7.8),
-            MovieEntity(title: "The Dark Knight", poster: "https://example.com/dark_knight.jpg", rating: 9.0),
-        ]
+    func getMovies() {
+        interactor?.getDataMovies()
+    }
+    
+    func getNumberOfMovies() -> Int {
+        movies.count
+    }
+    
+    func getMovieForIndex(_ index: Int) -> MovieEntity {
+        movies[index]
     }
     
     func selectItemMovie(index: Int) {
@@ -49,5 +58,12 @@ extension ListMoviesPresenter: ListMoviesPresenterProtocol {
 }
 
 extension ListMoviesPresenter: ListMoviesInteractorOutputProtocol {
+    func showError(with message: String) {
+        view?.showAlert(with: message)
+    }
     
+    func setDataMovies(with data: [MovieEntity]) {
+        self.movies = data
+        view?.reloadData()
+    }
 }

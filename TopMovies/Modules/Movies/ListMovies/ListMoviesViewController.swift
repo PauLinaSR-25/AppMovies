@@ -10,6 +10,9 @@ import UIKit
 
 protocol ListMoviesViewProtocol: AnyObject {
     var presenter: ListMoviesPresenterProtocol? {get set}
+    
+    func showAlert(with message: String)
+    func reloadData()
 }
 
 class ListMoviesViewController: UIViewController {
@@ -31,6 +34,8 @@ class ListMoviesViewController: UIViewController {
         contentView.getLogOutButton().addTarget(self, action: #selector(didTapLogOut), for: .touchUpInside)
         contentView.getTableView().dataSource = self
         contentView.getTableView().delegate = self
+        
+        presenter?.getMovies()
     }
     
     @objc private func didTapLogOut() {
@@ -40,14 +45,14 @@ class ListMoviesViewController: UIViewController {
 
 extension ListMoviesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.getMovies().count ?? 0
+        return presenter?.getNumberOfMovies() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
         cell.configure(with: MovieEntity(title: "Titulo", poster: "https://example.com/inception.jpg", rating: 7.5))
         
-        let movie = presenter?.getMovies()[indexPath.row]
+        let movie = presenter?.getMovieForIndex(indexPath.row)
         cell.configure(with: movie ?? MovieEntity())
         
         return cell
@@ -61,6 +66,15 @@ extension ListMoviesViewController: UITableViewDelegate {
 }
 
 extension ListMoviesViewController: ListMoviesViewProtocol {
+    func reloadData() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.contentView.getTableView().reloadData()
+        }
+    }
     
+    func showAlert(with message: String) {
+        BannerAlert.show(showSavedSuccessfully: false, message: message)
+    }
 }
 

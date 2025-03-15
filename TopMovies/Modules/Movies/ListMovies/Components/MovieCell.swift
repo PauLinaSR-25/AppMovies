@@ -14,6 +14,7 @@ class MovieCell: UITableViewCell {
         imageView.clipsToBounds = true
         imageView.image = UIImage(systemName: "popcorn.circle.fill")
         imageView.tintColor = .appSecondElement
+        imageView.layer.cornerRadius = 10
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -70,19 +71,19 @@ class MovieCell: UITableViewCell {
     
     func configure(with movie: MovieEntity) {
         titleLabel.text = movie.title
-        ratingLabel.text = "Rating: \(movie.rating)"
+        ratingLabel.text = "Rating: ⭐️ \(movie.rating)"
         
         guard let img = movie.poster else { return }
-        //
-        //            if let url = URL(string: img) {
-        //                DispatchQueue.global().async {
-        //                    if let data = try? Data(contentsOf: url) {
-        //                        DispatchQueue.main.async {
-        //                            self.posterImageView.image = UIImage(data: data)
-        //                        }
-        //                    }
-        //                }
-        //            }
+        
+        if let url = URL(string: img) {
+            DispatchQueue.global().async {
+                if let data = try? Data(contentsOf: url) {
+                    DispatchQueue.main.async {
+                        self.posterImageView.image = UIImage(data: data)
+                    }
+                }
+            }
+        }
     }
 }
 

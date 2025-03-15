@@ -58,6 +58,8 @@ extension ListMoviesView {
             logOutButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: ExecutionDevice.detectDevice() == .iPad ? 0.6 : 0.8),
             logOutButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -40),
         ])
+        
+        tableView.rowHeight = 100
     }
 }
 

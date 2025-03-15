@@ -21,9 +21,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         self.window = window
         
-        let navigationC = UINavigationController(rootViewController: AuthenticationRouter.createModule())
-        
-        window.rootViewController = navigationC
+        if UserDefaults.standard.bool(forKey: "isLoggedIn") {
+            let navigationC = UINavigationController(rootViewController: AuthenticationRouter.createModule())
+            window.rootViewController = navigationC
+            navigationC.pushViewController(ListMoviesRouter.createModule(), animated: true)
+           } else {
+               let navigationC = UINavigationController(rootViewController: AuthenticationRouter.createModule())
+               window.rootViewController = navigationC
+           }
         window.makeKeyAndVisible()
         
         guard let _ = (scene as? UIWindowScene) else { return }
