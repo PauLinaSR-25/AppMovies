@@ -36,9 +36,9 @@ class AuthenticationInteractor: AuthenticationInteractorInputProtocol {
             return
         }
         
-        if (MockManager.shared.runAppWithMock && isUserValidMocks(with: email, with: password)) ||
-            (!MockManager.shared.runAppWithMock && isUserValid(with: email, with: password)) {
-            MockManager.saveCredentials(with: email)
+        if (LocalManager.shared.runAppWithMock && isUserValidMocks(with: email, with: password)) ||
+            (!LocalManager.shared.runAppWithMock && isUserValid(with: email, with: password)) {
+            LocalManager.saveCredentials(with: email)
             presenter?.navigateToListMovies()
             return
         }

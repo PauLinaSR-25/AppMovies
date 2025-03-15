@@ -14,7 +14,7 @@ struct MovieEntity {
     var rating: Double = 0.0
 }
 
-struct MovieAPIEntity: Decodable {
+struct MovieAPIEntity: Codable {
     let id: Int
     let title: String
     let posterPath: String?

@@ -31,6 +31,19 @@ class ListMoviesInteractor: ListMoviesInteractorInputProtocol {
     private var movies: [MovieAPIEntity] = []
     
     func getDataMovies() {
+        
+        if let localData = LocalManager.authUser {
+            print("List of movies:")
+            print(localData)
+            
+            self.movies = localData
+            
+            let responseData = MovieArrayMapping.convert(movies)
+            let data = Array(responseData.prefix(10))
+            self.presenter?.setDataMovies(with: data)
+            return
+        }
+        
         let movieService = MovieService()
         
         movieService.fetchTopRatedMovies { [weak self] result in
@@ -41,6 +54,7 @@ class ListMoviesInteractor: ListMoviesInteractorInputProtocol {
                 print(movies)
                 
                 self.movies = movies
+                LocalManager.authUser = movies
                 
                 let responseData = MovieArrayMapping.convert(movies)
                 let data = Array(responseData.prefix(10))
@@ -58,6 +72,6 @@ class ListMoviesInteractor: ListMoviesInteractorInputProtocol {
     }
     
     func logOut() {
-        MockManager.logOutLogin()
+        LocalManager.logOutLogin()
     }
 }
