@@ -11,6 +11,8 @@ import Foundation
 //Presenter
 protocol AuthenticationPresenterProtocol: AnyObject {
     var interactor: AuthenticationInteractorInputProtocol? {get set}
+    
+    func login(email: String?, password: String?)
 }
 
 class AuthenticationPresenter {
@@ -28,9 +30,17 @@ class AuthenticationPresenter {
 }
 
 extension AuthenticationPresenter: AuthenticationPresenterProtocol {
-    
+    func login(email: String?, password: String?) {
+        interactor?.login(email, password)
+    }
 }
 
 extension AuthenticationPresenter: AuthenticationInteractorOutputProtocol {
+    func showError(message: String) {
+        view?.showAlert(with: message)
+    }
     
+    func navigateToListMovies() {
+        router.navigateToListMovies()
+    }
 }

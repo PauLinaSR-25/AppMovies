@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AuthenticationRouterProtocol: AnyObject {
-    
+    func navigateToListMovies()
 }
 
 class AuthenticationRouter {
@@ -33,7 +33,10 @@ class AuthenticationRouter {
 }
 
 extension AuthenticationRouter: AuthenticationRouterProtocol {
-    
+    func navigateToListMovies() {
+        let vc = ListMoviesRouter.createModule()
+        viewController?.navigationController?.pushViewController(vc, animated: true)
+    }
 }
     
     

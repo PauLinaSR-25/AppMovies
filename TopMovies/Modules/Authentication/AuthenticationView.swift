@@ -10,6 +10,42 @@ import UIKit
 
 final class AuthenticationView: UIView {
     //MARK: - Properties
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Inicio de sesión"
+        label.font = UIFont.fontTitle()
+        label.textAlignment = .center
+        label.textColor = .appSecondElement
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.2
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let emailTextField: CustomTextField = {
+        let textField = CustomTextField(fieldType: .email)
+        textField.placeholder = "Correo electrónico"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    private let passwordTextField: CustomTextField = {
+        let textField = CustomTextField(fieldType: .password)
+        textField.placeholder = "Contraseña"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    let loginButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Iniciar sesión", for: .normal)
+        button.backgroundColor = .appElement
+        button.layer.cornerRadius = 10
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font =  UIFont.fontButtons()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     //MARK: - init
     init() {
@@ -25,9 +61,44 @@ final class AuthenticationView: UIView {
 
 extension AuthenticationView {
     private func setup() {
-        translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .appScreenBackground
         
-        backgroundColor = .orange
+        let stackView = UIStackView(arrangedSubviews: [emailTextField, passwordTextField])
+        stackView.axis = .vertical
+        stackView.spacing = 16
+        stackView.distribution = .fillEqually
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        addSubview(titleLabel)
+        addSubview(stackView)
+        addSubview(loginButton)
+        
+        NSLayoutConstraint.activate([
+            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            titleLabel.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -60),
+            titleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5),
+            
+            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            stackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6),
+            
+            emailTextField.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.055),
+            
+            loginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            loginButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6),
+            loginButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 40),
+            loginButton.heightAnchor.constraint(equalTo: emailTextField.heightAnchor)
+        ])
+    }
+}
+
+extension AuthenticationView {
+    func getEmail() -> String? {
+        emailTextField.text
+    }
+    
+    func getPassword() -> String? {
+        passwordTextField.text
     }
 }
 

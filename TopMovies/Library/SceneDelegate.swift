@@ -21,7 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         self.window = window
         
-        window.rootViewController = AuthenticationRouter.createModule()
+        let navigationC = UINavigationController(rootViewController: AuthenticationRouter.createModule())
+        
+        window.rootViewController = navigationC
         window.makeKeyAndVisible()
         
         guard let _ = (scene as? UIWindowScene) else { return }
