@@ -20,5 +20,4 @@ protocol ListMoviesInteractorOutputProtocol: AnyObject {
 
 class ListMoviesInteractor: ListMoviesInteractorInputProtocol {
     weak var presenter: ListMoviesInteractorOutputProtocol?
-    
 }

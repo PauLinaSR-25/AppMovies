@@ -24,7 +24,7 @@ class ListMoviesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Top Ten Rated"
+        title = "Listado de Top de Peliculas"
         self.navigationItem.hidesBackButton = true
         navigationController?.setNavigationBarHidden(false, animated: true)
         
@@ -45,10 +45,10 @@ extension ListMoviesViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
-        cell.configure(with: Movie(title: "Titulo", poster: "https://example.com/inception.jpg", rating: 7.5))
+        cell.configure(with: MovieEntity(title: "Titulo", poster: "https://example.com/inception.jpg", rating: 7.5))
         
         let movie = presenter?.getMovies()[indexPath.row]
-        cell.configure(with: movie ?? Movie())
+        cell.configure(with: movie ?? MovieEntity())
         
         return cell
     }

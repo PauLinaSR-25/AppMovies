@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Movie {
+struct MovieEntity {
     var title: String = "Sin titulo"
     var poster: String?
     var rating: Double = 0.0

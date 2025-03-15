@@ -21,6 +21,7 @@ class MovieCell: UITableViewCell {
     private let titleLabel:  UILabel = {
         let label = UILabel()
         label.font = UIFont.fontTitleCell()
+        label.text = "Titulo"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -67,7 +68,7 @@ class MovieCell: UITableViewCell {
         ])
     }
     
-    func configure(with movie: Movie) {
+    func configure(with movie: MovieEntity) {
         titleLabel.text = movie.title
         ratingLabel.text = "Rating: \(movie.rating)"
         

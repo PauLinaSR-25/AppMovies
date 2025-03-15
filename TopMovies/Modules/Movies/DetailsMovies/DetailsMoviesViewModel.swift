@@ -8,3 +8,10 @@
 
 import Foundation
 
+struct DetailsMovieEntity {
+    let title: String
+    let posterImage: String // Nombre de la imagen en assets
+    let rating: Double
+    let description: String
+    let releaseDate: String
+}

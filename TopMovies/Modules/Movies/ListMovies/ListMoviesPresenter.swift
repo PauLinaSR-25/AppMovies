@@ -13,7 +13,7 @@ protocol ListMoviesPresenterProtocol: AnyObject {
     var interactor: ListMoviesInteractorInputProtocol? {get set}
     
     func logOut()
-    func getMovies() -> [Movie]
+    func getMovies() -> [MovieEntity]
     func selectItemMovie(index: Int)
 }
 
@@ -31,16 +31,16 @@ class ListMoviesPresenter {
 }
 
 extension ListMoviesPresenter: ListMoviesPresenterProtocol {
-    func getMovies() -> [Movie] {
+    func getMovies() -> [MovieEntity] {
         [
-            Movie(title: "Inception", poster: "https://example.com/inception.jpg", rating: 8.8),
-            Movie(title: "Titanic", poster: "https://example.com/titanic.jpg", rating: 7.8),
-            Movie(title: "The Dark Knight", poster: "https://example.com/dark_knight.jpg", rating: 9.0),
+            MovieEntity(title: "Inception", poster: "https://example.com/inception.jpg", rating: 8.8),
+            MovieEntity(title: "Titanic", poster: "https://example.com/titanic.jpg", rating: 7.8),
+            MovieEntity(title: "The Dark Knight", poster: "https://example.com/dark_knight.jpg", rating: 9.0),
         ]
     }
     
     func selectItemMovie(index: Int) {
-        
+        router.navigationToDetailsMovie(with: index)
     }
     
     func logOut() {
