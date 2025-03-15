@@ -43,4 +43,22 @@ extension UIFont {
             return UIFont(name: "Avenir-Heavy", size: 14) ?? .boldSystemFont(ofSize: 14)
         }
     }
+    
+    static func fontCaptions() -> UIFont {
+        switch ExecutionDevice.detectDevice() {
+        case .iPad:
+            return UIFont(name: "Avenir-Heavy", size: 26) ?? .boldSystemFont(ofSize: 26)
+        default:
+            return UIFont(name: "Avenir-Heavy", size: 14) ?? .boldSystemFont(ofSize: 14)
+        }
+    }
+    
+    static func fontBody() -> UIFont {
+        switch ExecutionDevice.detectDevice() {
+        case .iPad:
+            return UIFont(name: "Avenir-Medium", size: 26) ?? .boldSystemFont(ofSize: 26)
+        default:
+            return UIFont(name: "Avenir-Medium", size: 14) ?? .boldSystemFont(ofSize: 14)
+        }
+    }
 }

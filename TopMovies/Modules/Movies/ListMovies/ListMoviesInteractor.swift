@@ -14,6 +14,7 @@ protocol ListMoviesInteractorInputProtocol: AnyObject {
     
     func getDataMovies()
     func selectItemMovie(with index: Int)
+    func logOut()
 }
 
 
@@ -54,5 +55,9 @@ class ListMoviesInteractor: ListMoviesInteractorInputProtocol {
     func selectItemMovie(with index: Int) {
         let id = movies[index].id
         presenter?.setIdMovie(value: id)
+    }
+    
+    func logOut() {
+        MockManager.logOutLogin()
     }
 }

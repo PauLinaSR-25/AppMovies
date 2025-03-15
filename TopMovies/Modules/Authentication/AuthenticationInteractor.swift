@@ -59,6 +59,7 @@ extension AuthenticationInteractor {
     }
     
     private func isUserValid(with email: String,with password: String) -> Bool {
+        // This part was left without credential validation since there is no real service to authenticate. Authentication with Firebase could be put here.
         return true
     }
 }

@@ -53,6 +53,7 @@ extension ListMoviesPresenter: ListMoviesPresenterProtocol {
     }
     
     func logOut() {
+        interactor?.logOut()
         router.navigationToLogin()
     }
 }

@@ -31,6 +31,8 @@ class AuthenticationViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         contentView.addGestureRecognizer(tapGesture)
         contentView.getLoginButton().addTarget(self, action: #selector(didTapLogin), for: .touchUpInside)
+        
+        contentView.startRotating()
     }
     
     @objc private func didTapLogin() {

@@ -3,13 +3,24 @@
 //  TopMovies
 //
 //  Created by Paulina Sanchez Salazar on 14/03/25.
-//  
+//
 //
 
 import UIKit
 
 final class AuthenticationView: UIView {
     //MARK: - Properties
+    private let headerImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "movieclapper")
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .clear
+        imageView.tintColor = .darkGray
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Inicio de sesión"
@@ -47,13 +58,23 @@ final class AuthenticationView: UIView {
         return button
     }()
     
+    private let bdMoviesImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage.imgBD
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .clear
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     //MARK: - init
     init() {
         super.init(frame: .zero)
-       
+        
         setup()
     }
-   
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -69,11 +90,18 @@ extension AuthenticationView {
         stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
+        addSubview(headerImageView)
         addSubview(titleLabel)
         addSubview(stackView)
         addSubview(loginButton)
+        addSubview(bdMoviesImageView)
         
         NSLayoutConstraint.activate([
+            headerImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            headerImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
+            headerImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: ExecutionDevice.detectDevice() == .iPad ? 0.16 : 0.38),
+            headerImageView.heightAnchor.constraint(equalTo: headerImageView.widthAnchor),
+            
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -60),
             titleLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: ExecutionDevice.detectDevice() == .iPad ? 0.5 : 1.0),
@@ -87,7 +115,12 @@ extension AuthenticationView {
             loginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             loginButton.widthAnchor.constraint(equalTo: widthAnchor, multiplier: ExecutionDevice.detectDevice() == .iPad ? 0.6 : 0.8),
             loginButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 40),
-            loginButton.heightAnchor.constraint(equalTo: emailTextField.heightAnchor)
+            loginButton.heightAnchor.constraint(equalTo: emailTextField.heightAnchor),
+            
+            bdMoviesImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            bdMoviesImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: ExecutionDevice.detectDevice() == .iPad ? 0.4 : 0.6),
+            bdMoviesImageView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            bdMoviesImageView.heightAnchor.constraint(equalToConstant: 20),
         ])
     }
 }
@@ -103,6 +136,16 @@ extension AuthenticationView {
     
     func getLoginButton() -> UIButton {
         loginButton
+    }
+    
+    func startRotating() {
+        UIView.animate(withDuration: 2.0,
+                       delay: 0.8,
+                       options: [.repeat, .curveLinear],
+                       animations: {
+            self.headerImageView.transform = self.headerImageView.transform.rotated(by: .pi)
+        },
+                       completion: nil)
     }
 }
 
