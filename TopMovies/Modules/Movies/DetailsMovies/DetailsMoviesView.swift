@@ -75,10 +75,30 @@ extension DetailsMoviesView {
             stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             stackView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
+            stackView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.9),
             
             posterImageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.26),
             posterImageView.widthAnchor.constraint(equalTo: heightAnchor)
         ])
+    }
+    
+    func setDetails(data: DetailsMovieEntity) {
+        titleLabel.text = data.title
+        ratingLabel.text = "⭐️ Rating: \(data.rating)"
+        descriptionLabel.text = data.description
+        releaseDateLabel.text = "📅 Fecha de lanzamiento: \(data.releaseDate)"
+        
+        guard let img = data.poster else { return }
+        
+        if let url = URL(string: img) {
+            DispatchQueue.global().async {
+                if let data = try? Data(contentsOf: url) {
+                    DispatchQueue.main.async {
+                        self.posterImageView.image = UIImage(data: data)
+                    }
+                }
+            }
+        }
     }
 }
 

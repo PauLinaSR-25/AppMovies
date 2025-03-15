@@ -17,4 +17,12 @@ class MovieArrayMapping {
             }
         }
     }
+    
+    static func convert(_ input: MovieDetailAPIEntity) -> DetailsMovieEntity {
+        if let poster = input.posterPath {
+            return DetailsMovieEntity(title: input.title, poster: "https://image.tmdb.org/t/p/w500\(poster)", rating: input.voteAverage, description: input.overview, releaseDate: input.releaseDate)
+        } else {
+            return DetailsMovieEntity(title: input.title, rating: input.voteAverage, description: input.overview, releaseDate: input.releaseDate)
+        }
+    }
 }//class

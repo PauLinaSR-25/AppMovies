@@ -49,7 +49,7 @@ extension ListMoviesPresenter: ListMoviesPresenterProtocol {
     }
     
     func selectItemMovie(index: Int) {
-        router.navigationToDetailsMovie(with: index)
+        interactor?.selectItemMovie(with: index)
     }
     
     func logOut() {
@@ -58,6 +58,7 @@ extension ListMoviesPresenter: ListMoviesPresenterProtocol {
 }
 
 extension ListMoviesPresenter: ListMoviesInteractorOutputProtocol {
+    
     func showError(with message: String) {
         view?.showAlert(with: message)
     }
@@ -65,5 +66,9 @@ extension ListMoviesPresenter: ListMoviesInteractorOutputProtocol {
     func setDataMovies(with data: [MovieEntity]) {
         self.movies = data
         view?.reloadData()
+    }
+    
+    func setIdMovie(value: Int) {
+        router.navigationToDetailsMovie(with: value)
     }
 }

@@ -13,6 +13,7 @@ protocol ListMoviesInteractorInputProtocol: AnyObject {
     var presenter: ListMoviesInteractorOutputProtocol? {get set}
     
     func getDataMovies()
+    func selectItemMovie(with index: Int)
 }
 
 
@@ -20,12 +21,13 @@ protocol ListMoviesInteractorOutputProtocol: AnyObject {
     //Interactor->Presenter
     func showError(with message: String)
     func setDataMovies(with data: [MovieEntity])
+    func setIdMovie(value: Int)
 }
 
 class ListMoviesInteractor: ListMoviesInteractorInputProtocol {
     weak var presenter: ListMoviesInteractorOutputProtocol?
     
-    private var movies: [MovieEntity] = []
+    private var movies: [MovieAPIEntity] = []
     
     func getDataMovies() {
         let movieService = MovieService()
@@ -36,21 +38,21 @@ class ListMoviesInteractor: ListMoviesInteractorInputProtocol {
             case .success(let movies):
                 print("List of movies:")
                 print(movies)
-                let data = Array(movies.prefix(10))
+                
+                self.movies = movies
+                
+                let responseData = MovieArrayMapping.convert(movies)
+                let data = Array(responseData.prefix(10))
                 self.presenter?.setDataMovies(with: data)
             case .failure(let error):
-                let message = getErrorMessage(from: error)
+                let message = MovieService.getErrorMessage(from: error)
                 self.presenter?.showError(with: message)
             }
         }
     }
     
-    private func getErrorMessage(from error: WebServiceError) -> String {
-        switch error {
-        case .unableToPerformRequest, .urlSessionFailed:
-            return "No se pudo realizar la solicitud"
-        case .unexpectedNilData, .unexpectedStatusCode, .failedToDecode:
-            return "Se recibieron datos inesperados"
-        }
+    func selectItemMovie(with index: Int) {
+        let id = movies[index].id
+        presenter?.setIdMovie(value: id)
     }
 }

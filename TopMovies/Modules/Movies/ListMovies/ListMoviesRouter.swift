@@ -10,7 +10,7 @@ import UIKit
 
 protocol ListMoviesRouterProtocol: AnyObject {
     func navigationToLogin()
-    func navigationToDetailsMovie(with index: Int)
+    func navigationToDetailsMovie(with id: Int)
 }
 
 class ListMoviesRouter {
@@ -34,8 +34,8 @@ class ListMoviesRouter {
 }
 
 extension ListMoviesRouter: ListMoviesRouterProtocol {
-    func navigationToDetailsMovie(with index: Int) {
-        let vc = DetailsMoviesRouter.createModule(id: index)
+    func navigationToDetailsMovie(with id: Int) {
+        let vc = DetailsMoviesRouter.createModule(with: id)
         viewController?.navigationController?.pushViewController(vc, animated: true)
     }
     

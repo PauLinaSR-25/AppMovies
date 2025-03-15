@@ -15,7 +15,7 @@ protocol DetailsMoviesRouterProtocol: AnyObject {
 class DetailsMoviesRouter {
     weak var viewController: UIViewController?
 
-    static func createModule(id: Int)->UIViewController{
+    static func createModule(with id: Int)->UIViewController {
 
         let view = DetailsMoviesViewController()
 
@@ -27,6 +27,8 @@ class DetailsMoviesRouter {
         view.presenter = presenter
         interactor.presenter = presenter
         router.viewController = view
+        
+        presenter.id = id
         
         return view
     }
