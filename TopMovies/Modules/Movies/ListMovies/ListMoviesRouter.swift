@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ListMoviesRouterProtocol: AnyObject {
-    
+    func navigationToLogin()
 }
 
 class ListMoviesRouter {
@@ -33,7 +33,9 @@ class ListMoviesRouter {
 }
 
 extension ListMoviesRouter: ListMoviesRouterProtocol {
-    
+    func navigationToLogin() {
+        viewController?.navigationController?.popViewController(animated: true)
+    }
 }
     
     

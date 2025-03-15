@@ -8,3 +8,8 @@
 
 import Foundation
 
+struct Movie {
+    var title: String = "Sin titulo"
+    var poster: String?
+    var rating: Double = 0.0
+}

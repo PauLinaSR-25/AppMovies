@@ -36,7 +36,7 @@ final class AuthenticationView: UIView {
         return textField
     }()
     
-    let loginButton: UIButton = {
+    private let loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Iniciar sesión", for: .normal)
         button.backgroundColor = .appElement
@@ -99,6 +99,10 @@ extension AuthenticationView {
     
     func getPassword() -> String? {
         passwordTextField.text
+    }
+    
+    func getLoginButton() -> UIButton {
+        loginButton
     }
 }
 

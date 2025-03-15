@@ -30,7 +30,7 @@ class AuthenticationViewController: UIViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         contentView.addGestureRecognizer(tapGesture)
-        contentView.loginButton.addTarget(self, action: #selector(didTapLogin), for: .touchUpInside)
+        contentView.getLoginButton().addTarget(self, action: #selector(didTapLogin), for: .touchUpInside)
     }
     
     @objc private func didTapLogin() {

@@ -36,17 +36,18 @@ class AuthenticationInteractor: AuthenticationInteractorInputProtocol {
             return
         }
         
-        if MockManager.shared.runAppWithMock, isUserValidMocks(with: email, with: password) {
-            self.presenter?.navigateToListMovies()
-            return
-        } else if !MockManager.shared.runAppWithMock, isUserValid(with: email, with: password) {
-            self.presenter?.navigateToListMovies()
+        if (MockManager.shared.runAppWithMock && isUserValidMocks(with: email, with: password)) ||
+            (!MockManager.shared.runAppWithMock && isUserValid(with: email, with: password)) {
+            MockManager.saveCredentials(with: email)
+            presenter?.navigateToListMovies()
             return
         }
         
         presenter?.showError(message: "Credenciales invalidas, intenta nuevamente")
     }
-    
+}
+
+extension AuthenticationInteractor {
     private func isValidEmail(text: String) -> Bool {
         let emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegex)
